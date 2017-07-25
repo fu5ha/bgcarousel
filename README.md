@@ -1,7 +1,8 @@
 # bgcarousel
 
-`bgcarousel` is intended to be an easy-to-use, drop-in replacement for feh to be used for background switching. It will automatically
-swap your background after a set amount of time, defaulting to 10 seconds.
+`bgcarousel` is intended to be an easy-to-use, drop-in replacement for `feh` to be used for background switching. It will 
+search for images in a directory (by default `~/Pictures/Wallpapers/`) and automatically swap your background after a set 
+amount of time, defaulting to 10 seconds.
 
 # How to use
 
@@ -21,7 +22,7 @@ export PATH=$PATH:GOPATH/bin
 With go installed, do
 
 ```sh
-$ go install -u github.com/termhn/bgcarousel
+$ go get -u github.com/termhn/bgcarousel
 ```
 And finally in your i3 config, add:
 
@@ -52,6 +53,11 @@ GLOBAL OPTIONS:
    --help, -h                   show help
    --version, -v                print the version
 ```
+For example, to make it choose a random image in `~/Pictures/Wallpapers/selects/` every 30 seconds, you could do
+```
+bgcarousel --random -t 30 -d ~/Pictures/Wallpapers/selects
+```
+
 # Possible future features
 I want to work on a way to have a small fade transition between each image, but I'm not sure it will be possible 
 without a rewrite using a different underlying program to set the background.
