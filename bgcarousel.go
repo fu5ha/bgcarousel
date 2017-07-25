@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -14,28 +13,23 @@ import (
 	"github.com/urfave/cli"
 )
 
-func easeInOutQuad(t int, b int, c int, d int) int {
-	t /= d / 2
-	if t < 1 {
-		return c/2*t*t + b
-	}
-	t--
-	return -c/2*(t*(t-2)-1) + b
-}
-
-func bashExec(command string) (stdout string, stderr string, err error) {
-	var stdo bytes.Buffer
-	var stde bytes.Buffer
-	cmd := exec.Command("bash", "-c", command)
-	cmd.Stdout = &stdo
-	cmd.Stderr = &stde
-	err = cmd.Run()
-	stdout = stdo.String()
-	stderr = stde.String()
-	return
-}
-
 func main() {
+	cli.AppHelpTemplate = `NAME:
+   {{.Name}} - {{.Usage}}
+   {{if .Version}}
+VERSION:
+   {{.Version}}
+   {{end}}{{if len .Authors}}
+AUTHOR:
+   {{range .Authors}}{{ . }}{{end}}
+   {{end}}
+USAGE:
+   {{.HelpName}} {{if .VisibleFlags}}[global options]{{end}}
+   {{if .VisibleFlags}}
+GLOBAL OPTIONS:
+   {{range .VisibleFlags}}{{.}}
+   {{end}}{{end}}
+`
 	usr, _ := user.Current()
 	defaultDir := filepath.Join(usr.HomeDir, "Pictures/Wallpapers")
 	var timeout int
@@ -43,8 +37,16 @@ func main() {
 	var random bool
 	app := cli.NewApp()
 	app.Name = "bgcarousel"
-	app.Version = "0.1.0"
+	app.Version = "1.0.0"
+	app.Authors = []cli.Author{
+		cli.Author{
+			Name:  "Gray Olson",
+			Email: "gray@grayolson.com",
+		},
+	}
 	app.Usage = "automatically rotate background image on a timer"
+	app.Commands = nil
+	app.ArgsUsage = ""
 	app.Flags = []cli.Flag{
 		cli.IntFlag{
 			Name:        "t, timeout",
@@ -68,6 +70,7 @@ func main() {
 		files, err := ioutil.ReadDir(directory)
 
 		if err != nil {
+			fmt.Println("Error opening directory: " + directory + ", ")
 			return cli.NewExitError(err, 2)
 		}
 

@@ -10,10 +10,15 @@ swap your background after a set amount of time, defaulting to 10 seconds.
 First, install Go and configure your environment. For example:
 
 ```sh
+$ sudo dnf install go
+```
+In bashrc or equivalent config file for other shells:
+```
 export GOPATH=$HOME/go
 export PATH=$PATH:GOPATH/bin
 ```
-Then,
+
+With go installed, do
 
 ```sh
 $ go install -u github.com/termhn/bgcarousel
@@ -21,7 +26,7 @@ $ go install -u github.com/termhn/bgcarousel
 And finally in your i3 config, add:
 
 ```
-exec_always --no-startup-id killall bgcarousel; bgcarousel --random
+exec_always --no-startup-id killall bgcarousel; bgcarousel
 ```
 
 ## Options
@@ -30,16 +35,16 @@ Use `bgcarousel -h` to print the help information, also for reference here:
 $ bgcarousel -h
 NAME:
    bgcarousel - automatically rotate background image on a timer
-
-USAGE:
-   bgcarousel [global options] command [command options] [arguments...]
-
+   
 VERSION:
-   0.1.0
-
-COMMANDS:
-     help, h  Shows a list of commands or help for one command
-
+   1.0.0
+   
+AUTHOR:
+   Gray Olson <gray@grayolson.com>
+   
+USAGE:
+   bgcarousel [global options]
+   
 GLOBAL OPTIONS:
    -t value, --timeout value    Specify timeout between image rotation in seconds (default: 10)
    -d value, --directory value  Specify directory to search for images (default: "/home/amelie/Pictures/Wallpapers")
@@ -47,4 +52,7 @@ GLOBAL OPTIONS:
    --help, -h                   show help
    --version, -v                print the version
 ```
+# Possible future features
+I want to work on a way to have a small fade transition between each image, but I'm not sure it will be possible 
+without a rewrite using a different underlying program to set the background.
 
