@@ -57,6 +57,8 @@ For example, to make it choose a random image in `~/Pictures/Wallpapers/selects/
 ```
 bgcarousel --random -t 30 -d ~/Pictures/Wallpapers/selects
 ```
+# Todo
+Handle errors that occur when removing images from source directory while running and support adding new images to source directory while running
 
 # Possible future features
 I want to work on a way to have a small fade transition between each image, but I'm not sure it will be possible 
