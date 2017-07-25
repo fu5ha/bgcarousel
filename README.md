@@ -16,7 +16,7 @@ $ sudo dnf install go
 In bashrc or equivalent config file for other shells:
 ```
 export GOPATH=$HOME/go
-export PATH=$PATH:GOPATH/bin
+export PATH=$PATH:$GOPATH/bin
 ```
 
 With go installed, do
