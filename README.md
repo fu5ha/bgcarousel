@@ -18,6 +18,10 @@ In bashrc or equivalent config file for other shells:
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 ```
+It also depends on feh to do the actual work behind the scenes, so install that as well.
+```sh
+$ sudo dnf install feh
+```
 
 With go installed, do
 
